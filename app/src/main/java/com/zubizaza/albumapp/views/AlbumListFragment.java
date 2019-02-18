@@ -77,6 +77,7 @@ public class AlbumListFragment extends Fragment {
         });
 
         mViewModel.statusMessage.observe(this, message ->{
+            mProgressBar.setVisibility(View.INVISIBLE);
             showMessage(message);
         });
 

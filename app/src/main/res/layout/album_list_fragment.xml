@@ -18,13 +18,14 @@
         />
 
     <TextView android:id="@+id/empty_placeholder"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:gravity="center"
         android:text="@string/placeholder_text"
+        android:padding="24dp"
         android:textSize="18sp"
         android:visibility="visible"
-        app:layout_constraintTop_toBottomOf="@+id/progress_circular"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
 
