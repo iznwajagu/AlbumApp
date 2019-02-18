@@ -53,7 +53,7 @@ public class AlbumRepository {
 
     public LiveData<List<Album>> getAlbumList() {
         fetchAlbum();
-        return null;
+        return albumLocalCache.fetchAlbumsFromLocalDatabase();
     }
 
 }
