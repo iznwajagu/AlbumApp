@@ -96,6 +96,7 @@ public class AlbumListFragment extends Fragment {
 
     private void showAlbumListView(boolean shouldShowList) {
         mRecyclerView.setVisibility(shouldShowList ? View.VISIBLE : View.GONE);
+        mProgressBar.setVisibility(shouldShowList ? View.GONE : View.VISIBLE);
     }
 
 
