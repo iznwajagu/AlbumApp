@@ -1,4 +1,4 @@
-package com.zubizaza.albumapp.ui.albumlist;
+package com.zubizaza.albumapp.viewmodels;
 
 import android.arch.lifecycle.ViewModel;
 

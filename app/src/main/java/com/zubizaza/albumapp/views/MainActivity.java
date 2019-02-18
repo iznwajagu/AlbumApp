@@ -1,9 +1,9 @@
-package com.zubizaza.albumapp;
+package com.zubizaza.albumapp.views;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import com.zubizaza.albumapp.ui.albumlist.AlbumListFragment;
+import com.zubizaza.albumapp.R;
 
 public class MainActivity extends AppCompatActivity {
 

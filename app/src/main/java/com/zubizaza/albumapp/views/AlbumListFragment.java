@@ -1,4 +1,4 @@
-package com.zubizaza.albumapp.ui.albumlist;
+package com.zubizaza.albumapp.views;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.zubizaza.albumapp.R;
+import com.zubizaza.albumapp.viewmodels.AlbumViewModel;
 
 public class AlbumListFragment extends Fragment {
 
