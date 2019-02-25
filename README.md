@@ -1,2 +1,2 @@
 # AlbumApp
-An App demonstrating simple Android MVVM, Room, RxJava, Dependency Injection and Unit Tests
+An App demonstrating simple Android MVVM, Room, RxJava, Dagger2 and Unit Tests
