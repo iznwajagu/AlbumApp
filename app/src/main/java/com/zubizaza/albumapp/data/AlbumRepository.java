@@ -2,12 +2,15 @@ package com.zubizaza.albumapp.data;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
+import android.support.annotation.NonNull;
 
 import com.zubizaza.albumapp.api.NetworkApi;
 import com.zubizaza.albumapp.data.model.Album;
 
 import java.util.Collections;
 import java.util.List;
+
+import javax.inject.Inject;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -19,12 +22,13 @@ public class AlbumRepository {
     private AlbumLocalCache albumLocalCache;
     public MutableLiveData networkErrors = new MutableLiveData<String>();
 
-    public AlbumRepository(NetworkApi networkApi, AlbumLocalCache albumLocalCache){
+    @Inject
+    public AlbumRepository(@NonNull NetworkApi networkApi, @NonNull AlbumLocalCache albumLocalCache){
         this.networkApi = networkApi;
         this.albumLocalCache = albumLocalCache;
     }
 
-    void fetchAlbum(){
+    void fetchAlbumsFromNetwork(){
 
         networkApi.fetchAlbums().enqueue(new Callback<List<Album>>() {
 
@@ -52,7 +56,10 @@ public class AlbumRepository {
     }
 
     public LiveData<List<Album>> getAlbumList() {
-        fetchAlbum();
+        //fetch new set of albums from network
+        fetchAlbumsFromNetwork();
+
+        //subscribe to receive albums from local room database
         return albumLocalCache.fetchAlbumsFromLocalDatabase();
     }
 

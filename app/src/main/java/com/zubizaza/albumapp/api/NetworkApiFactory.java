@@ -6,11 +6,10 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+
 public class NetworkApiFactory {
 
-    private static String BASE_URL = "https://jsonplaceholder.typicode.com";
-
-    public static NetworkApi create() {
+    public static NetworkApi create(String BASE_URL) {
         HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
         logging.setLevel(HttpLoggingInterceptor.Level.BODY);
 

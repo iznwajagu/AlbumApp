@@ -24,7 +24,7 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
 @RunWith(AndroidJUnit4.class)
-public class AlbumViewModelTest {
+public class AlbumDatabaseTest {
 
     private AlbumDatabase mAlbumDatabase;
 
@@ -50,8 +50,6 @@ public class AlbumViewModelTest {
         LiveData<List<Album>> liveAlbums = albumDao.fetchAlbums();
 
         Assert.assertEquals("album list size ", 10, extractLiveDataValue(liveAlbums).size());
-
-
 
 
     }

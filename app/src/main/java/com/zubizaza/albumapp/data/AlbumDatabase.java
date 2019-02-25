@@ -7,6 +7,9 @@ import android.content.Context;
 
 import com.zubizaza.albumapp.data.model.Album;
 
+import javax.inject.Singleton;
+
+@Singleton
 @Database(entities = {Album.class}, version = 1 , exportSchema = false)
 public abstract class AlbumDatabase extends RoomDatabase {
 
