@@ -15,10 +15,10 @@ public class AlbumViewModel extends ViewModel {
     private LiveData<List<Album>> mAlbumList;
     public MutableLiveData<String> statusMessage = new MutableLiveData<>();
 
-    AlbumViewModel(AlbumRepository albumRepository){
+    public AlbumViewModel(AlbumRepository albumRepository){
         this.albumRepository = albumRepository;
         subscribeToRepositoryAlbums();
-        subscribeToRepoErrors();
+        subscribeToNetworkErrors();
     }
 
     void subscribeToRepositoryAlbums(){
@@ -29,12 +29,10 @@ public class AlbumViewModel extends ViewModel {
         return mAlbumList;
     }
 
-    private void subscribeToRepoErrors(){
-
+    private void subscribeToNetworkErrors(){
         albumRepository.networkErrors.observeForever( error -> {
             statusMessage.postValue(error.toString());
         });
-
     }
 
 
