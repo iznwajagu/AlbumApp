@@ -6,7 +6,7 @@ import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.NonNull;
 
 @Entity(tableName = "albumdb", indices = {@Index(value = {"id"}, unique = true)})
-public class Album {
+public class Album implements  Comparable<Album>{
 
     @PrimaryKey
     @NonNull
@@ -45,5 +45,9 @@ public class Album {
     }
 
 
+    @Override
+    public int compareTo(Album album) {
+        return this.title.toUpperCase().compareTo(album.getTitle().toUpperCase());
+    }
 
 }

@@ -20,6 +20,7 @@ import com.zubizaza.albumapp.R;
 import com.zubizaza.albumapp.data.model.Album;
 import com.zubizaza.albumapp.viewmodels.AlbumViewModel;
 
+import java.util.Collections;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -88,6 +89,7 @@ public class AlbumListFragment extends Fragment {
     }
 
     private void setAdapter(List<Album> albumList) {
+        Collections.sort(albumList);
 
         if (albumList != null && albumList.size() != 0){
             mAlbumListAdapter.swapAlbumList(albumList);
