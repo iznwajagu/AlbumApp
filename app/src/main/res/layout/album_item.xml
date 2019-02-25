@@ -14,7 +14,6 @@
         android:textSize="18sp"
         android:gravity="start"
         app:layout_constraintBottom_toTopOf="@id/user_id"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:padding="16dp"/>
 

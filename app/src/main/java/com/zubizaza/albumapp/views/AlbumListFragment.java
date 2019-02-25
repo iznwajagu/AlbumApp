@@ -1,5 +1,6 @@
 package com.zubizaza.albumapp.views;
 
+import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -14,17 +15,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.zubizaza.albumapp.AlbumApp;
 import com.zubizaza.albumapp.R;
 import com.zubizaza.albumapp.data.model.Album;
-import com.zubizaza.albumapp.di.Injector;
 import com.zubizaza.albumapp.viewmodels.AlbumViewModel;
-import com.zubizaza.albumapp.viewmodels.ViewModelFactory;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 public class AlbumListFragment extends Fragment {
 
-    private AlbumViewModel mViewModel;
+    @Inject
+    ViewModelProvider.Factory viewModelFactory;
+
     private RecyclerView mRecyclerView;
     private TextView mMessageHolder;
     private AlbumListAdapter mAlbumListAdapter;
@@ -55,7 +59,6 @@ public class AlbumListFragment extends Fragment {
 
         mRecyclerView.setNestedScrollingEnabled(false);
 
-
         mAlbumListAdapter = new AlbumListAdapter(getContext());
 
         mRecyclerView.setAdapter(mAlbumListAdapter);
@@ -69,8 +72,9 @@ public class AlbumListFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        ViewModelFactory factory = Injector.provideViewModelFactory(this.getContext());
-        AlbumViewModel mViewModel = ViewModelProviders.of(this, factory).get(AlbumViewModel.class);
+        ((AlbumApp) getActivity().getApplication()).getAppComponent().injectFragment(this);
+
+        AlbumViewModel mViewModel = ViewModelProviders.of(this, viewModelFactory).get(AlbumViewModel.class);
 
         mViewModel.publishAlbumsToSubsribers().observe(this, albumList -> {
             setAdapter(albumList);
@@ -98,6 +102,7 @@ public class AlbumListFragment extends Fragment {
     private void showAlbumListView(boolean shouldShowList) {
         mRecyclerView.setVisibility(shouldShowList ? View.VISIBLE : View.GONE);
         mProgressBar.setVisibility(shouldShowList ? View.GONE : View.VISIBLE);
+        mMessageHolder.setVisibility(shouldShowList ? View.GONE : View.VISIBLE);
     }
 
 
