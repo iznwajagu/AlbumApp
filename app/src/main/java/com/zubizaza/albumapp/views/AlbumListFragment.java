@@ -20,7 +20,6 @@ import com.zubizaza.albumapp.R;
 import com.zubizaza.albumapp.data.model.Album;
 import com.zubizaza.albumapp.viewmodels.AlbumViewModel;
 
-import java.util.Collections;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -77,39 +76,31 @@ public class AlbumListFragment extends Fragment {
 
         AlbumViewModel mViewModel = ViewModelProviders.of(this, viewModelFactory).get(AlbumViewModel.class);
 
-        mViewModel.publishAlbumsToSubsribers().observe(this, albumList -> {
+        mViewModel.getAlbumList().observe(this, albumList -> {
             setAdapter(albumList);
         });
 
-        mViewModel.statusMessage.observe(this, message ->{
-            mProgressBar.setVisibility(View.INVISIBLE);
+        mViewModel.getStatusMessage().observe(this, message ->{
             showMessage(message);
+        });
+
+        mViewModel.progressBarState.observe(this, progressbarStatus -> {
+            mProgressBar.setVisibility(View.INVISIBLE);
         });
 
     }
 
     private void setAdapter(List<Album> albumList) {
-        Collections.sort(albumList);
 
-        if (albumList != null && albumList.size() != 0){
-            mAlbumListAdapter.swapAlbumList(albumList);
-            showAlbumListView(true);
-        }else{
-            mMessageHolder.setText("Albums not available");
-            showAlbumListView(false);
-        }
+        mAlbumListAdapter.swapAlbumList(albumList);
+        mRecyclerView.setVisibility(View.VISIBLE);
+        mMessageHolder.setVisibility(View.INVISIBLE);
 
-    }
-
-    private void showAlbumListView(boolean shouldShowList) {
-        mRecyclerView.setVisibility(shouldShowList ? View.VISIBLE : View.GONE);
-        mProgressBar.setVisibility(shouldShowList ? View.GONE : View.VISIBLE);
-        mMessageHolder.setVisibility(shouldShowList ? View.GONE : View.VISIBLE);
     }
 
 
     private void showMessage(String message) {
-        //Toast.makeText(this.getContext(), message, Toast.LENGTH_LONG).show();
+
         Snackbar.make(getView().getRootView(), message, Snackbar.LENGTH_SHORT)
                 .setAction("Action", null).show();
 

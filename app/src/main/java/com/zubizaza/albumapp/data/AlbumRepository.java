@@ -20,7 +20,7 @@ public class AlbumRepository {
 
     private NetworkApi networkApi;
     private AlbumLocalCache albumLocalCache;
-    public MutableLiveData networkErrors = new MutableLiveData<String>();
+    private MutableLiveData networkErrors = new MutableLiveData<String>();
 
     @Inject
     public AlbumRepository(@NonNull NetworkApi networkApi, @NonNull AlbumLocalCache albumLocalCache){
@@ -61,6 +61,14 @@ public class AlbumRepository {
 
         //subscribe to receive albums from local room database
         return albumLocalCache.fetchAlbumsFromLocalDatabase();
+
+
     }
+
+    public MutableLiveData getNetworkErrors() {
+        return networkErrors;
+    }
+
+
 
 }
